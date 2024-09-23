@@ -72,35 +72,6 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => FavoritesScreen(
-                      favoriteRecipes: favoriteRecipes,
-                      onRecipeTap: (recipe) {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => DetailsScreen(
-                              recipe: recipe,
-                              isFavorite: favoriteRecipes.contains(recipe),
-                              onFavoriteToggle: () => toggleFavorite(recipe),
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                );
-              },
-              child: Text('View Favorites'),
-              style: ElevatedButton.styleFrom(backgroundColor: Colors.teal),
-            ),
-          ),
           Expanded(
             child: ListView.builder(
               itemCount: recipes.length,
@@ -134,6 +105,35 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 );
               },
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => FavoritesScreen(
+                      favoriteRecipes: favoriteRecipes,
+                      onRecipeTap: (recipe) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => DetailsScreen(
+                              recipe: recipe,
+                              isFavorite: favoriteRecipes.contains(recipe),
+                              onFavoriteToggle: () => toggleFavorite(recipe),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                );
+              },
+              child: Text('View Favorites'),
+              style: ElevatedButton.styleFrom(backgroundColor: Colors.teal),
             ),
           ),
         ],
