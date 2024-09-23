@@ -1,6 +1,19 @@
 # recipe_book_app
 
-A new Flutter project.
+Recipe Book App Flutter project.
+The following features are added:
+-Home screen
+-Details screen
+-Favorites screen
+
+The resultant APK is present at the root directory.
+
+### Output Images:
+
+![](./Output_Images/Output_1.jpeg)
+![](./Output_Images/Output_2.jpeg)
+![](./Output_Images/Output_3.jpeg)
+![](./Output_Images/Output_4.jpeg)
 
 ## Getting Started
 
