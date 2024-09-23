@@ -32,6 +32,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.recipe['name']!),
+        backgroundColor: Colors.teal,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -49,6 +50,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
             ElevatedButton(
               onPressed: toggleFavorite,
               child: Text(isFavorite ? 'Unmark Favorite' : 'Mark as Favorite'),
+              style: ElevatedButton.styleFrom(backgroundColor: Colors.teal),
             ),
           ],
         ),

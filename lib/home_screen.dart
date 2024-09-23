@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'details_screen.dart';
-import 'favourites_screen.dart';
+import 'favorites_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -30,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Recipe Book'),
+        title: Text('Recipe Book', style: TextStyle(fontSize: 24)),
         actions: [
           IconButton(
             icon: Icon(Icons.favorite),
@@ -38,32 +38,63 @@ class _HomeScreenState extends State<HomeScreen> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => FavoritesScreen(favoriteRecipes: favoriteRecipes),
+                  builder: (context) => FavoritesScreen(
+                    favoriteRecipes: favoriteRecipes,
+                    onRecipeTap: (recipe) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DetailsScreen(
+                            recipe: recipe,
+                            isFavorite: favoriteRecipes.contains(recipe),
+                            onFavoriteToggle: () => toggleFavorite(recipe),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
                 ),
               );
             },
           ),
         ],
+        backgroundColor: Colors.teal,
       ),
-      body: ListView.builder(
-        itemCount: recipes.length,
-        itemBuilder: (context, index) {
-          return ListTile(
-            title: Text(recipes[index]['name']!),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => DetailsScreen(
-                    recipe: recipes[index],
-                    isFavorite: favoriteRecipes.contains(recipes[index]),
-                    onFavoriteToggle: () => toggleFavorite(recipes[index]),
-                  ),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: ListView.builder(
+          itemCount: recipes.length,
+          itemBuilder: (context, index) {
+            return Card(
+              margin: const EdgeInsets.symmetric(vertical: 8.0),
+              child: ListTile(
+                title: Text(
+                  recipes[index]['name']!,
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
-              );
-            },
-          );
-        },
+                trailing: IconButton(
+                  icon: Icon(
+                    favoriteRecipes.contains(recipes[index]) ? Icons.favorite : Icons.favorite_border,
+                    color: favoriteRecipes.contains(recipes[index]) ? Colors.red : null,
+                  ),
+                  onPressed: () => toggleFavorite(recipes[index]),
+                ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => DetailsScreen(
+                        recipe: recipes[index],
+                        isFavorite: favoriteRecipes.contains(recipes[index]),
+                        onFavoriteToggle: () => toggleFavorite(recipes[index]),
+                      ),
+                    ),
+                  );
+                },
+              ),
+            );
+          },
+        ),
       ),
     );
   }
